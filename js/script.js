@@ -30,6 +30,8 @@ function titleClickHandler(event) {
 
     if (clickAttribute === actualAtrributeInArticle) {
       chooseArticle = article;
+      /*Add tag for */
+
     }
   }
   chooseArticle.classList.add('active');
@@ -74,3 +76,52 @@ function generateTitleLinks() {
 }
 
 generateTitleLinks();
+/* ----------------------------------------------------------------------------------- */
+
+function Cleartext(clear) {
+  clear.innerHTML = '';
+}
+
+function foundArticlesWrapperTag(singleArticle) {
+  const articleTag = singleArticle.querySelector('.list-horizontal');
+
+  Cleartext(articleTag);
+
+}
+
+function getsingleTagForArticle(y) {
+  for (let singleTag of y) {
+    const articleTag = document.querySelector('.list-horizontal');
+    let tagHtml = '<li><a href="#tag-' + singleTag + '">' + singleTag + '</a></li>';
+
+    articleTag.insertAdjacentHTML('beforeend', tagHtml);
+
+  }
+}
+
+function articleTagForArray(x) {
+  const TagForArticleArray = x.split(' ');
+
+  getsingleTagForArticle(TagForArticleArray);
+}
+
+function getTagFromData_Tage(get) {
+  const articleTag = get.getAttribute('data-tags');
+  articleTagForArray(articleTag);
+
+}
+
+function foundArticles() {
+  const articles = document.querySelectorAll('.post');
+  for (let singleArticle of articles) {
+    foundArticlesWrapperTag(singleArticle);
+    getTagFromData_Tage(singleArticle);
+  }
+}
+
+function generateTags() {
+
+  foundArticles();
+
+}
+generateTags();
