@@ -1,5 +1,59 @@
 'use strict';
 
+/* Mentor-Tag */
+
+function Cleartext() {
+  const articleTag = document.querySelector('.list-horizontal');
+  articleTag.innerHTML = 'aaa';
+}
+
+
+
+function getsingleTagForArticle(TagForArticleArray) {
+  for (let singleTag of TagForArticleArray) {
+    const articleTag = document.querySelector('.list-horizontal');
+    let tagHtml = '<li><a href="#tag-' + singleTag + '">' + singleTag + '</a></li>';
+    console.log(tagHtml);
+    articleTag.insertAdjacentHTML('beforeend', tagHtml);
+
+  }
+}
+
+function articleTagForArray(articlesTag) {
+  const TagForArticleArray = articlesTag.split(' ');
+  console.log(TagForArticleArray);
+  getsingleTagForArticle(TagForArticleArray);
+}
+
+function getTagFromData_Tage(chooseArticle) {
+  const articlesTag = chooseArticle.getAttribute('data-tags');
+
+  articleTagForArray(articlesTag);
+
+}
+
+
+
+function generateTags(chooseArticle) {
+
+  Cleartext();
+
+  getTagFromData_Tage(chooseArticle);
+
+}
+
+/* -------------*/
+
+
+
+
+
+
+
+
+
+
+
 function titleClickHandler(event) {
   event.preventDefault();
 
@@ -30,8 +84,9 @@ function titleClickHandler(event) {
 
     if (clickAttribute === actualAtrributeInArticle) {
       chooseArticle = article;
-      /*Add tag for */
-
+      /*Add tag for article*/
+      console.log(article);
+      generateTags(article);
     }
   }
   chooseArticle.classList.add('active');
@@ -76,9 +131,11 @@ function generateTitleLinks() {
 }
 
 generateTitleLinks();
-/* ----------------------------------------------------------------------------------- */
 
-function Cleartext(clear) {
+
+/* Tag */
+
+/* function Cleartext(clear) {
   clear.innerHTML = '';
 }
 
@@ -124,4 +181,4 @@ function generateTags() {
   foundArticles();
 
 }
-generateTags();
+generateTags(); */
