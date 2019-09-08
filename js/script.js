@@ -3,32 +3,33 @@
 /* Mentor-Tag */
 
 function Cleartext() {
-  const articleTag = document.querySelector('.list-horizontal');
-  articleTag.innerHTML = 'aaa';
+  const articleTag = document.querySelectorAll('.list-horizontal');
+  for (let line of articleTag)
+    line.innerHTML = '';
 }
 
 
 
-function getsingleTagForArticle(TagForArticleArray) {
+function getsingleTagForArticle(TagForArticleArray, chooseArticle) {
   for (let singleTag of TagForArticleArray) {
-    const articleTag = document.querySelector('.list-horizontal');
+    const articleTag = chooseArticle.querySelector('.list-horizontal');
     let tagHtml = '<li><a href="#tag-' + singleTag + '">' + singleTag + '</a></li>';
-    console.log(tagHtml);
+
     articleTag.insertAdjacentHTML('beforeend', tagHtml);
 
   }
 }
 
-function articleTagForArray(articlesTag) {
+function articleTagForArray(articlesTag, chooseArticle) {
   const TagForArticleArray = articlesTag.split(' ');
-  console.log(TagForArticleArray);
-  getsingleTagForArticle(TagForArticleArray);
+
+  getsingleTagForArticle(TagForArticleArray, chooseArticle);
 }
 
 function getTagFromData_Tage(chooseArticle) {
   const articlesTag = chooseArticle.getAttribute('data-tags');
 
-  articleTagForArray(articlesTag);
+  articleTagForArray(articlesTag, chooseArticle);
 
 }
 
@@ -47,19 +48,13 @@ function generateTags(chooseArticle) {
 
 
 
-
-
-
-
-
-
-
 function titleClickHandler(event) {
   event.preventDefault();
 
   const activeLinks = document.querySelectorAll('.titles a.active');
 
   for (let activeLink of activeLinks) {
+
     activeLink.classList.remove('active');
   }
 
@@ -85,7 +80,7 @@ function titleClickHandler(event) {
     if (clickAttribute === actualAtrributeInArticle) {
       chooseArticle = article;
       /*Add tag for article*/
-      console.log(article);
+      /* console.log(article); */
       generateTags(article);
     }
   }
@@ -122,7 +117,9 @@ function getSingleArticleIDAndTitlePostAndCreateLinkHtml() {
 function generateTitleLinks() {
   clearMessages();
   getSingleArticleIDAndTitlePostAndCreateLinkHtml();
+
   const links = document.querySelectorAll('.titles a');
+
 
   for (let link of links) {
     link.addEventListener('click', titleClickHandler);
@@ -133,52 +130,56 @@ function generateTitleLinks() {
 generateTitleLinks();
 
 
-/* Tag */
 
-/* function Cleartext(clear) {
-  clear.innerHTML = '';
+
+
+function tagClickHandler(event) {
+  /* prevent default action for this event */
+  event.preventDefault();
+  console.log(this);
+
+  /* make a new constant "href" and read the attribute "href" of the clicked element */
+  const href = this.querySelector('href');
+  /* console.log(href); */
+  /* make a new constant "tag" and extract tag from the "href" constant */
+
+  /* find all tag links with class active */
+
+  /* START LOOP: for each active tag link */
+
+  /* remove class active */
+
+  /* END LOOP: for each active tag link */
+
+  /* find all tag links with "href" attribute equal to the "href" constant */
+
+  /* START LOOP: for each found tag link */
+
+  /* add class active */
+
+  /* END LOOP: for each found tag link */
+
+  /* execute function "generateTitleLinks" with article selector as argument */
 }
 
-function foundArticlesWrapperTag(singleArticle) {
-  const articleTag = singleArticle.querySelector('.list-horizontal');
 
-  Cleartext(articleTag);
 
-}
+function addClickListenersToTags() {
 
-function getsingleTagForArticle(y) {
-  for (let singleTag of y) {
-    const articleTag = document.querySelector('.list-horizontal');
-    let tagHtml = '<li><a href="#tag-' + singleTag + '">' + singleTag + '</a></li>';
 
-    articleTag.insertAdjacentHTML('beforeend', tagHtml);
+  /* const arrayWithLinksToTags = findAllLinkstoTags(); */
+  const arrayWithLinksToTags = document.querySelectorAll('.list-horizontal');
+  console.log(arrayWithLinksToTags);
+  for (let tagSingleLink of arrayWithLinksToTags) {
 
+    tagSingleLink.addEventListener('click', tagClickHandler);
   }
-}
-
-function articleTagForArray(x) {
-  const TagForArticleArray = x.split(' ');
-
-  getsingleTagForArticle(TagForArticleArray);
-}
-
-function getTagFromData_Tage(get) {
-  const articleTag = get.getAttribute('data-tags');
-  articleTagForArray(articleTag);
 
 }
 
-function foundArticles() {
-  const articles = document.querySelectorAll('.post');
-  for (let singleArticle of articles) {
-    foundArticlesWrapperTag(singleArticle);
-    getTagFromData_Tage(singleArticle);
-  }
-}
 
-function generateTags() {
 
-  foundArticles();
 
-}
-generateTags(); */
+
+
+addClickListenersToTags();
