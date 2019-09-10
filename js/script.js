@@ -5,6 +5,14 @@ let lackOfClickOnPage = 0; /*if is 0 that lack of click on link on the page  */
 const articleTag = {
   article1: ['#tag-cat', '#tag-cactus', '#tag-scissors'],
   article2: ['#tag-cat', '#tag-car'],
+  article3: ['#tag-dog', '#tag-swine'],
+  article4: ['#tag-dog', '#food'],
+  article5: ['#person'],
+  article6: ['#tag-cat', '#dog', '#tag-spoon'],
+  article7: ['#tag-children'],
+  article8: ['#tag-dog'],
+  article9: ['#tag-party'],
+  article10: ['#tag-children', '#relax'],
 };
 
 function Cleartext() {
