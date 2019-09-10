@@ -1,6 +1,11 @@
 'use strict';
 
-/* Mentor-Tag */
+let lackOfClickOnPage = 0; /*if is 0 that lack of click on link on the page  */
+/*The object with all articles and them tags */
+const articleTag = {
+  article1: ['#tag-cat', '#tag-cactus', '#tag-scissors'],
+  article2: ['#tag-cat', '#tag-car'],
+};
 
 function Cleartext() {
   const articleTag = document.querySelectorAll('.list-horizontal');
@@ -79,9 +84,10 @@ function titleClickHandler(event) {
 
     if (clickAttribute === actualAtrributeInArticle) {
       chooseArticle = article;
-      /*Add tag for article*/
-      /* console.log(article); */
+      /*Add tag for  this article*/
       generateTags(article);
+      ++lackOfClickOnPage;
+      addClickListenersToTags(article);
     }
   }
   chooseArticle.classList.add('active');
@@ -119,7 +125,7 @@ function generateTitleLinks() {
   getSingleArticleIDAndTitlePostAndCreateLinkHtml();
 
   const links = document.querySelectorAll('.titles a');
-
+  document.querySelector('.titles>li a').classList.add('active'); /*The link Article 1 is active after open the page */
 
   for (let link of links) {
     link.addEventListener('click', titleClickHandler);
@@ -129,57 +135,62 @@ function generateTitleLinks() {
 
 generateTitleLinks();
 
-
-
+function lookForThesameElements(get) {
+  console.log(get);
+  for (let tab in articleTag) {
+    /* console.log(articleTag[tab]); */
+    let activeLine = articleTag[tab];
+    /*  console.log(activeLine.length); */
+    for (let x = 0; x < activeLine.length; x++) {
+      /* console.log(activeLine[x]); */
+      if (activeLine[x] === get) {
+        console.log("dodaj link");
+      }
+      /* countThesameTags(activeLine[x]); */
+    }
+  }
+}
 
 
 function tagClickHandler(event) {
   /* prevent default action for this event */
   event.preventDefault();
-  console.log(this);
+  lookForThesameElements(this.getAttribute('href'));
 
-  /* make a new constant "href" and read the attribute "href" of the clicked element */
-  const href = this.querySelector('href');
-  /* console.log(href); */
-  /* make a new constant "tag" and extract tag from the "href" constant */
-
-  /* find all tag links with class active */
-
-  /* START LOOP: for each active tag link */
-
-  /* remove class active */
-
-  /* END LOOP: for each active tag link */
-
-  /* find all tag links with "href" attribute equal to the "href" constant */
-
-  /* START LOOP: for each found tag link */
-
-  /* add class active */
-
-  /* END LOOP: for each found tag link */
-
-  /* execute function "generateTitleLinks" with article selector as argument */
 }
 
-
-
-function addClickListenersToTags() {
-
-
-  /* const arrayWithLinksToTags = findAllLinkstoTags(); */
-  const arrayWithLinksToTags = document.querySelectorAll('.list-horizontal');
-  console.log(arrayWithLinksToTags);
-  for (let tagSingleLink of arrayWithLinksToTags) {
+function clickTag(variable1) {
+  for (let tagSingleLink of variable1) {
 
     tagSingleLink.addEventListener('click', tagClickHandler);
+
+  }
+}
+
+function addClickListenersToTags(article) {
+
+  if (lackOfClickOnPage !== 0) {
+    const actualArticle = article.querySelectorAll(".list-horizontal a");
+    clickTag(actualArticle);
+
+  } else {
+
+    const arrayWithLinksToTags = document.querySelectorAll('.post.active .list-horizontal a');
+
+    clickTag(arrayWithLinksToTags);
   }
 
 }
-
-
-
-
-
-
 addClickListenersToTags();
+
+
+
+/* const quantityThesameTags = {};
+
+function countThesameTags(singleArrayElement) {
+  console.log(singleArrayElement);
+  quantityThesameTags.singleArrayElement = 0;
+  console.log(quantityThesameTags.cat);
+} */
+
+/*Create Object for article */
