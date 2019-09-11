@@ -190,11 +190,14 @@ function activeLinHtmlAfterFilterTags() {
 
 function lookForThesameElements(get) {
   clearMessages();
+  /*Get values from object with article and tags  */
   for (let tab in articleTag) {
+
 
     let activeLine = articleTag[tab];
 
     for (let x = 0; x < activeLine.length; x++) {
+
 
       if (activeLine[x] === get) {
         const articleContainTag = [tab];
@@ -309,3 +312,34 @@ function ClickToLinkAuthorHandler() {
 
 
 }
+/*Create tag's list in the right column */
+
+function addTagsLinksToRightColumn(variable) {
+  const tagsidebar = document.querySelector('.sidebar .tags');
+  for (let singleTag of variable) {
+    let tagLinkHtml = '<li><a href =' + singleTag + '>' + singleTag.slice(1) + ' </a></li>';
+    tagsidebar.insertAdjacentHTML('beforeend', tagLinkHtml);
+  }
+}
+
+function createTagListInRightColumn() {
+  const tagList = [];
+  /*Get values from object with article and tags  */
+  for (let tab in articleTag) {
+
+    let activeLine = articleTag[tab];
+
+    for (let x = 0; x < activeLine.length; x++) {
+
+      if ((tagList.indexOf(activeLine[x])) === -1) {
+        tagList.push(activeLine[x]);
+      }
+
+    }
+
+  }
+
+  addTagsLinksToRightColumn(tagList);
+}
+
+createTagListInRightColumn();
