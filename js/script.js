@@ -168,6 +168,9 @@ function activeLinHtmlAfterFilterTags() {
 
 
   let chooseArticle;
+  /* console.log('debug chooseArticle :', chooseArticle); */
+
+
   for (let article of allArrticles) {
 
     let actualAtrributeInArticle = article.getAttribute('id');
@@ -245,6 +248,7 @@ function clickTag(variable1) {
 
   for (let tagSingleLink of variable1) {
 
+
     tagSingleLink.addEventListener('click', tagClickHandler);
 
   }
@@ -254,6 +258,7 @@ function addClickListenersToTags(article) {
 
   if (lackOfClickOnPage !== 0) {
     const actualArticle = article.querySelectorAll(".list-horizontal a");
+
     clickTag(actualArticle);
 
   } else {
@@ -265,8 +270,6 @@ function addClickListenersToTags(article) {
 
 }
 addClickListenersToTags();
-
-
 
 /*Author link */
 
@@ -283,11 +286,9 @@ function createlinkHtml(singleArticle) {
 
     actualLink.addEventListener('click', activeLinHtmlAfterFilterTags);
 
-
   }
 
 }
-
 
 function checkExistAuthorNameInAllArticles(variable) {
   const getPosts = document.querySelectorAll('.post');
@@ -295,7 +296,7 @@ function checkExistAuthorNameInAllArticles(variable) {
     let nameOfAuthor = singleArticle.getAttribute('data-author');
     if (variable === nameOfAuthor) {
       createlinkHtml(singleArticle);
-      console.log(singleArticle);
+      /* console.log(singleArticle); */
     }
 
   }
@@ -314,32 +315,111 @@ function ClickToLinkAuthorHandler() {
 }
 /*Create tag's list in the right column */
 
-function addTagsLinksToRightColumn(variable) {
-  const tagsidebar = document.querySelector('.sidebar .tags');
-  for (let singleTag of variable) {
-    let tagLinkHtml = '<li><a href =' + singleTag + '>' + singleTag.slice(1) + ' </a></li>';
-    tagsidebar.insertAdjacentHTML('beforeend', tagLinkHtml);
+function addLinksHtmlToRightColumn(variable, variable1) {
+  let numberForClass;
+  for (let singleTag in variable1) {
+    numberForClass = variable1[singleTag];
+    let tagLinkHtml = '<li><a class="tag-size-' + numberForClass + '" href =' + singleTag + '>' + singleTag.slice(1) + '</a></li>';
+    variable.insertAdjacentHTML('beforeend', tagLinkHtml);
+
   }
 }
 
-function createTagListInRightColumn() {
-  const tagList = [];
+function calculateamountTagsForRightSection(variable) {
+  const MaxAndMinValues = {
+    min: 0,
+    max: 0
+  };
+
+  for (let i in variable) {
+    if (MaxAndMinValues.max < variable[i]) {
+
+      MaxAndMinValues.max = variable[i];
+    }
+
+  }
+  MaxAndMinValues.min = MaxAndMinValues.max;
+  for (let i in variable) {
+
+    MaxAndMinValues.min = Math.min(variable[i], MaxAndMinValues.min);
+  }
+
+}
+
+function createListInRightColumn(variable) {
+  const List = {};
   /*Get values from object with article and tags  */
-  for (let tab in articleTag) {
+  for (let tab in variable) {
 
     let activeLine = articleTag[tab];
 
     for (let x = 0; x < activeLine.length; x++) {
 
-      if ((tagList.indexOf(activeLine[x])) === -1) {
-        tagList.push(activeLine[x]);
-      }
+      if ((!List.hasOwnProperty(activeLine[x]))) {
+        /* tagList.push(activeLine[x]); */
+        List[activeLine[x]] = 1;
+      } else
+
+        List[activeLine[x]]++;
 
     }
 
   }
 
-  addTagsLinksToRightColumn(tagList);
+  return List;
 }
 
-createTagListInRightColumn();
+/*Call function  to  create  Tag's  links-Html for right section*/
+(function tagLinksHtmlToRightColumn() {
+  const ulTagRight = document.querySelector('.sidebar .tags');
+  const allListTagForRightSection = createListInRightColumn(articleTag);
+  addLinksHtmlToRightColumn(ulTagRight, allListTagForRightSection);
+  calculateamountTagsForRightSection(allListTagForRightSection);
+  const LinksTagRight = document.querySelectorAll('.sidebar .tags a');
+  for (let link of LinksTagRight) {
+    console.log(link);
+    link.addEventListener('click', clickTag(LinksTagRight));
+  }
+
+})();
+/* tagSingleLink.addEventListener('click', tagClickHandler); */
+
+function createAuthorListInRightColumn(variable) {
+  const List = {};
+
+  /*Get values from object with article and tags  */
+  /* for (let tab in variable) {
+
+    let activeLine = articleTag[tab];
+
+    for (let x = 0; x < activeLine.length; x++) {
+
+      if ((!List.hasOwnProperty(activeLine[x]))) {
+        
+        List[activeLine[x]] = 1;
+      } else
+
+        List[activeLine[x]]++;
+
+    }
+
+  } */
+
+  return List;
+
+}
+
+
+/*Call function  to  create  authors  links-Html for right section*/
+(function authorsLinksHtmlToRightColumn() {
+  const ulTagRight = document.querySelector('.sidebar .authors');
+  const LinksTagRight = document.querySelectorAll('.sidebar .authors a');
+  const getDataAuthors = document.querySelectorAll(".post.active a ");
+  const allListTagForRightSection = createAuthorListInRightColumn(getDataAuthors);
+  /*  addLinksHtmlToRightColumn(ulTagRight, allListTagForRightSection);
+   calculateamountTagsForRightSection(allListTagForRightSection);
+   for (let link of LinksTagRight) {
+     console.log(link);
+     link.addEventListener('click', tagClickHandler);
+   } */
+})();
