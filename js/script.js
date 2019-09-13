@@ -19,6 +19,7 @@ const articleTag = {
 
 function addAuthorToArticle(article, getDataAuthors) {
   const boxNameAuthor = article.querySelector('.post-author');
+
   let LinkAuthorHtml = 'by ' + '<a href = "#' + getDataAuthors + '" >' + getDataAuthors + '</a>';
   boxNameAuthor.insertAdjacentHTML('afterbegin', LinkAuthorHtml);
 }
@@ -283,6 +284,7 @@ function createlinkHtml(singleArticle) {
   const linkHtml = '<li><a href = "#' + articleId + '"><span>' + titlePost + '</span></a></li>';
   addMessages(linkHtml);
   const filterLinkHtml = document.querySelectorAll(".titles a ");
+
   for (let actualLink of filterLinkHtml) {
 
     actualLink.addEventListener('click', activeLinHtmlAfterFilterTags);
@@ -293,9 +295,12 @@ function createlinkHtml(singleArticle) {
 
 function checkExistAuthorNameInAllArticles(variable) {
   const getPosts = document.querySelectorAll('.post');
+
   for (let singleArticle of getPosts) {
     let nameOfAuthor = singleArticle.getAttribute('data-author');
+
     if (variable === nameOfAuthor) {
+
       createlinkHtml(singleArticle);
 
     }
@@ -410,8 +415,8 @@ function addAuthorLinksHtmlToRightColumn(variable, variable1) {
 
   for (let singleTag in variable1) {
     numberForClass = variable1[singleTag];
-    console.log(singleTag);
-    let tagLinkHtml = '<li><a  href =' + singleTag + '>' + singleTag.slice(1) + '(' + variable1[singleTag] + ')</a></li>';
+
+    let tagLinkHtml = '<li><a  href ="' + singleTag + '">' + singleTag.slice(1) + '(' + variable1[singleTag] + ')</a></li>';
     variable.insertAdjacentHTML('beforeend', tagLinkHtml);
 
   }
@@ -427,20 +432,22 @@ function authorsLinksHtmlToRightColumn() {
 
 
 
-  const filterLinkHtml = document.querySelectorAll(".sidebar .authors a ");
-  for (let getDataAuthors of filterLinkHtml) {
+  const filterLinkHtml = document.querySelectorAll(".sidebar .authors li ");
 
-    getDataAuthors.addEventListener('click', function () {
+  for (let getDataAuthors of filterLinkHtml) {
+    let linkA = getDataAuthors.querySelector('a');
+    linkA.addEventListener('click', function () {
       clearMessages();
-      const dataAuthorForArticle = filterLinkHtml.getAttribute('href').slice(1);
+      const dataAuthorForArticle = linkA.getAttribute('href').slice(1);
+
       checkExistAuthorNameInAllArticles(dataAuthorForArticle);
+
+
     });
+
+
 
   }
 
-  /* for (let link of LinksTagRight) {
-    console.log(link);
-    link.addEventListener('click', tagClickHandler);
-  } */
 }
 authorsLinksHtmlToRightColumn();
