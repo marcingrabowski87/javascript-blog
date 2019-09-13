@@ -21,12 +21,11 @@ function addAuthorToArticle(article, getDataAuthors) {
   const boxNameAuthor = article.querySelector('.post-author');
   let LinkAuthorHtml = 'by ' + '<a href = "#' + getDataAuthors + '" >' + getDataAuthors + '</a>';
   boxNameAuthor.insertAdjacentHTML('afterbegin', LinkAuthorHtml);
-
-
 }
 
 function getAttributeAuthorsFromArticle() {
   const getPosts = document.querySelectorAll('.post');
+
   for (let article of getPosts) {
     let getDataAuthors = article.getAttribute('data-author');
 
@@ -306,7 +305,7 @@ function checkExistAuthorNameInAllArticles(variable) {
 }
 
 function ClickToLinkAuthorHandler() {
-  const getDataAuthors = document.querySelector(".post.active a ");
+  const getDataAuthors = document.querySelector('.post.active a ');
   getDataAuthors.addEventListener('click', function () {
     clearMessages();
     const dataAuthorForArticle = getDataAuthors.getAttribute('href').slice(1);
@@ -384,49 +383,64 @@ function createListInRightColumn(variable) {
   }
 
 })();
-/* tagSingleLink.addEventListener('click', tagClickHandler); */
 
-/* function createAuthorListInRightColumn(variable) {
+
+function createAuthorListInRightColumn(variable) {
   const List = {};
 
-  
-  for (let tab in variable) {
 
-    let activeLine = articleTag[tab];
+  for (let singleLine of variable) {
 
-    for (let x = 0; x < activeLine.length; x++) {
+    let getLinkAForAForAuthor = singleLine.querySelector('a').getAttribute('href');
 
-      if ((!List.hasOwnProperty(activeLine[x]))) {
+    if ((!List.hasOwnProperty(getLinkAForAForAuthor))) {
 
-        List[activeLine[x]] = 1;
-      } else
+      List[getLinkAForAForAuthor] = 1;
+    } else
 
-        List[activeLine[x]]++;
-
-    }
+      List[getLinkAForAForAuthor]++;
 
   }
 
-
   return List;
+}
 
-} */
+function addAuthorLinksHtmlToRightColumn(variable, variable1) {
+  let numberForClass;
+
+  for (let singleTag in variable1) {
+    numberForClass = variable1[singleTag];
+    console.log(singleTag);
+    let tagLinkHtml = '<li><a  href =' + singleTag + '>' + singleTag.slice(1) + '(' + variable1[singleTag] + ')</a></li>';
+    variable.insertAdjacentHTML('beforeend', tagLinkHtml);
+
+  }
+}
 
 
 /*Call function  to  create  authors  links-Html for right section*/
-(function authorsLinksHtmlToRightColumn() {
+function authorsLinksHtmlToRightColumn() {
   const ulTagRight = document.querySelector('.sidebar .authors');
+  const LinksTagRight = document.querySelectorAll('.post-author');
+  const autorObject = createAuthorListInRightColumn(LinksTagRight);
+  addAuthorLinksHtmlToRightColumn(ulTagRight, autorObject);
 
-  const getDataAuthors = document.querySelectorAll(".post.active a ");
-  /* const allListTagForRightSection = createAuthorListInRightColumn(getDataAuthors); */
-  /*  addLinksHtmlToRightColumn(ulTagRight, allListTagForRightSection);
-   calculateamountTagsForRightSection(allListTagForRightSection); */
 
-  const LinksTagRight = document.querySelectorAll('.post-author a');
-  console.log(LinksTagRight);
+
+  const filterLinkHtml = document.querySelectorAll(".sidebar .authors a ");
+  for (let getDataAuthors of filterLinkHtml) {
+
+    getDataAuthors.addEventListener('click', function () {
+      clearMessages();
+      const dataAuthorForArticle = filterLinkHtml.getAttribute('href').slice(1);
+      checkExistAuthorNameInAllArticles(dataAuthorForArticle);
+    });
+
+  }
 
   /* for (let link of LinksTagRight) {
     console.log(link);
     link.addEventListener('click', tagClickHandler);
   } */
-})();
+}
+authorsLinksHtmlToRightColumn();
