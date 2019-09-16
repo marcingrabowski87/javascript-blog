@@ -456,6 +456,11 @@ function createAuthorListInRightColumn(variable) {
       List['#' + author]++;
 
   }
+  const allAuthorsData = {
+    tags: []
+  }
+
+
   console.log("debug", List);
   return List;
 }
