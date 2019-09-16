@@ -140,4 +140,12 @@ body {
 .sidebar .tags li a.tag-size-5 {
   font-size: 28px;
 }
+
+.post-author li {
+  list-style: none;
+}
+
+.post-author li span {
+  padding-left: 5px;
+}
 /*# sourceMappingURL=style.css.map */
