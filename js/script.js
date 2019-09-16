@@ -9,8 +9,8 @@ const templates1 = Handlebars.compile(linkForAuthorInArticle);
 const linkForTagInArticle = document.querySelector('#template-Tag-link-in-article').innerHTML;
 const templates2 = Handlebars.compile(linkForTagInArticle);
 
-const linkForTagRightColumn = document.querySelector('#template-author-cloud-link').innerHTML;
-const templates3 = Handlebars.compile(linkForTagRightColumn);
+const linkForAuthorsRightColumn = document.querySelector('#template-author-cloud-link').innerHTML;
+const templates3 = Handlebars.compile(linkForAuthorsRightColumn);
 
 
 
@@ -475,9 +475,9 @@ function createAuthorListInRightColumn(variable) {
       List['#' + author]++;
 
   }
-  /*  const allAuthorsData = {
-     authors: []
-   } */
+  const allAuthorsData = {
+    authors: []
+  }
   addAuthorLinksHtmlToRightColumn(List);
   console.log(List);
   /* console.log("debug", List); */
