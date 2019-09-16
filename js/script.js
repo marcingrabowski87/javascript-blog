@@ -435,17 +435,36 @@ function createListInRightColumn(variable) {
 
 })();
 
+function addAuthorLinksHtmlToRightColumn(variable) {
+  /***** tuatj pisać (brakuje szablonu dla tagów i autorów w prawej kolumnie )*/
+  let numberForClass;
+  /* console.log(variable);
+  console.log(variable1); */
+  for (let singleTag in variable) {
+
+    numberForClass = variable[singleTag];
+    /* const allTagsData = {
+      tags: []
+    } */
+    /* let tagLinkHtml = '<li><a href ="#' + singleTag + '">' + variable + ' </a></li> '; */
+    let tagLinkHtml = '<li><a  href ="' + singleTag + '">' + singleTag.slice(1) + '(' + variable[singleTag] + ')</a></li>';
+    document.querySelector('.sidebar .authors').insertAdjacentHTML('beforeend', tagLinkHtml);
+
+  }
+}
 
 function createAuthorListInRightColumn(variable) {
   const List = {};
-
-
+  let author;
+  let count;
+  /*  console.log("variable", variable); */
   for (let singleLine of variable) {
-    const ulTagRight = document.querySelector('.sidebar .authors');
-    let author = singleLine.getAttribute('data-author');
-    console.log("author:", author);
-    const count = document.querySelectorAll('[data-author="' + author + '"]');
-    console.log("count:", count);
+    /* const ulTagRight = document.querySelector('.sidebar .authors'); */
+    author = singleLine.getAttribute('data-author');
+    /* console.log("author:", author); */
+    count = document.querySelectorAll('[data-author="' + author + '"]');
+    /* console.log("count:", count); */
+
     /*  let getLinkAForAForAuthor = singleLine.querySelector('a').getAttribute('href'); */
 
     if ((!List.hasOwnProperty('#' + author))) {
@@ -456,30 +475,16 @@ function createAuthorListInRightColumn(variable) {
       List['#' + author]++;
 
   }
-  const allAuthorsData = {
-    authors: []
-  }
-
-
-  console.log("debug", List);
-  return List;
+  /*  const allAuthorsData = {
+     authors: []
+   } */
+  addAuthorLinksHtmlToRightColumn(List);
+  console.log(List);
+  /* console.log("debug", List); */
+  /*  return List; */
 }
 
-function addAuthorLinksHtmlToRightColumn(variable, variable1) {
-  /***** tuatj pisać (brakuje szablonu dla tagów i autorów w prawej kolumnie )*/
-  let numberForClass;
 
-  for (let singleTag in variable1) {
-    numberForClass = variable1[singleTag];
-    /* const allTagsData = {
-      tags: []
-    } */
-
-    let tagLinkHtml = '<li><a  href ="' + singleTag + '">' + singleTag.slice(1) + '(' + variable1[singleTag] + ')</a></li>';
-    variable.insertAdjacentHTML('beforeend', tagLinkHtml);
-
-  }
-}
 
 
 /*Call function  to  create  authors  links-Html for right column*/
