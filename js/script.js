@@ -9,7 +9,7 @@ const templates1 = Handlebars.compile(linkForAuthorInArticle);
 const linkForTagInArticle = document.querySelector('#template-Tag-link-in-article').innerHTML;
 const templates2 = Handlebars.compile(linkForTagInArticle);
 
-const linkForTagRightColumn = document.querySelector('#template-tag-cloud-link').innerHTML;
+const linkForTagRightColumn = document.querySelector('#template-author-cloud-link').innerHTML;
 const templates3 = Handlebars.compile(linkForTagRightColumn);
 
 
@@ -457,7 +457,7 @@ function createAuthorListInRightColumn(variable) {
 
   }
   const allAuthorsData = {
-    tags: []
+    authors: []
   }
 
 
