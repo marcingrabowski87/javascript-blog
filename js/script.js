@@ -441,31 +441,36 @@ function createAuthorListInRightColumn(variable) {
 
 
   for (let singleLine of variable) {
+    const ulTagRight = document.querySelector('.sidebar .authors');
+    let author = singleLine.getAttribute('data-author');
+    console.log("author:", author);
+    const count = document.querySelectorAll('[data-author="' + author + '"]');
+    console.log("count:", count);
+    /*  let getLinkAForAForAuthor = singleLine.querySelector('a').getAttribute('href'); */
 
-    let getLinkAForAForAuthor = singleLine.querySelector('a').getAttribute('href');
+    if ((!List.hasOwnProperty('#' + author))) {
 
-    if ((!List.hasOwnProperty(getLinkAForAForAuthor))) {
-
-      List[getLinkAForAForAuthor] = 1;
+      List['#' + author] = 1;
     } else
 
-      List[getLinkAForAForAuthor]++;
+      List['#' + author]++;
 
   }
-
+  console.log("debug", List);
   return List;
 }
 
 function addAuthorLinksHtmlToRightColumn(variable, variable1) {
+  /***** tuatj pisać (brakuje szablonu dla tagów i autorów w prawej kolumnie )*/
   let numberForClass;
 
   for (let singleTag in variable1) {
     numberForClass = variable1[singleTag];
-    const allTagsData = {
+    /* const allTagsData = {
       tags: []
-    }
+    } */
 
-    /* let tagLinkHtml = '<li><a  href ="' + singleTag + '">' + singleTag.slice(1) + '(' + variable1[singleTag] + ')</a></li>'; */
+    let tagLinkHtml = '<li><a  href ="' + singleTag + '">' + singleTag.slice(1) + '(' + variable1[singleTag] + ')</a></li>';
     variable.insertAdjacentHTML('beforeend', tagLinkHtml);
 
   }
@@ -474,11 +479,12 @@ function addAuthorLinksHtmlToRightColumn(variable, variable1) {
 
 /*Call function  to  create  authors  links-Html for right column*/
 function authorsLinksHtmlToRightColumn() {
-  const ulTagRight = document.querySelector('.sidebar .authors');
-  const LinksTagRight = document.querySelectorAll('.post-author');
+  /* const ulTagRight = document.querySelector('.sidebar .authors'); */
+  /* const LinksTagRight = document.querySelectorAll('.post-author'); */
+  const LinksTagRight = document.querySelectorAll('.post');
   const autorObject = createAuthorListInRightColumn(LinksTagRight);
-  addAuthorLinksHtmlToRightColumn(ulTagRight, autorObject);
-
+  /*  addAuthorLinksHtmlToRightColumn(ulTagRight, autorObject);
+   */
 
 
   const filterLinkHtml = document.querySelectorAll(".sidebar .authors li ");
