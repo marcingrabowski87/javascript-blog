@@ -266,7 +266,8 @@
 </script>
   <script id="template-author-cloud-link" type="text/x-handlebars-template">
     {{#each authors}}
-  <li>{{ author }}</li>
+
+  <li><a href='#{{ id }}'><span>{{ author }}{{ count }}</span></a></li>
   {{/each}}
 </script>
 

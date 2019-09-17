@@ -453,37 +453,46 @@ function addAuthorLinksHtmlToRightColumn(variable) {
   }
 }
 
-function createAuthorListInRightColumn(variable) {
-  const List = {};
-  let author;
-  let count;
-  /*  console.log("variable", variable); */
+function amountAythorsinBlog(variable) {
+  const amountAuthors = [];
   for (let singleLine of variable) {
-    /* const ulTagRight = document.querySelector('.sidebar .authors'); */
-    author = singleLine.getAttribute('data-author');
-    /* console.log("author:", author); */
-    count = document.querySelectorAll('[data-author="' + author + '"]');
-    /* console.log("count:", count); */
+    const author = singleLine.getAttribute('data-author');
 
-    /*  let getLinkAForAForAuthor = singleLine.querySelector('a').getAttribute('href'); */
-
-    if ((!List.hasOwnProperty('#' + author))) {
-
-      List['#' + author] = 1;
-    } else
-
-      List['#' + author]++;
-
+    if (amountAuthors.indexOf(author) === -1)
+      amountAuthors.push(author);
   }
-  const allAuthorsData = {
-    authors: []
-  }
-  addAuthorLinksHtmlToRightColumn(List);
-  console.log(List);
-  /* console.log("debug", List); */
-  /*  return List; */
+  return amountAuthors;
 }
 
+function createAuthorListInRightColumn(variable) {
+
+  const allAuthorsData = {
+    authors: []
+  };
+  let countstepsForLoop = 0;
+  const amountAuthors = amountAythorsinBlog(variable).length;
+
+
+  for (let singleLine of variable) {
+    const author = singleLine.getAttribute('data-author');
+
+    const count = document.querySelectorAll('[data-author="' + author + '"]');
+
+    if (countstepsForLoop < amountAuthors) {
+
+      allAuthorsData.authors.push({
+        author: author,
+        count: count.length,
+        id: author
+      });
+      countstepsForLoop++;
+
+
+    }
+
+  }
+  document.querySelector('.sidebar .authors').insertAdjacentHTML('beforeend', templates3(allAuthorsData));
+}
 
 
 
