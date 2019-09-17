@@ -12,6 +12,9 @@ const templates2 = Handlebars.compile(linkForTagInArticle);
 const linkForAuthorsRightColumn = document.querySelector('#template-author-cloud-link').innerHTML;
 const templates3 = Handlebars.compile(linkForAuthorsRightColumn);
 
+const linkForTagssRightColumn = document.querySelector('#template-tag-cloud-link').innerHTML;
+const templates4 = Handlebars.compile(linkForTagssRightColumn);
+
 
 
 let lackOfClickOnPage = 0; /*if is 0 that lack of click on link on the page  */
@@ -369,12 +372,24 @@ function ClickToLinkAuthorHandler() {
 
 function addLinksHtmlToRightColumn(variable, variable1) {
   let numberForClass;
+
+  const allTagsData = {
+    tags: []
+  };
   for (let singleTag in variable1) {
     numberForClass = variable1[singleTag];
+
     let tagLinkHtml = '<li><a class="tag-size-' + numberForClass + '" href =' + singleTag + '>' + singleTag.slice(1) + '</a></li>';
-    variable.insertAdjacentHTML('beforeend', tagLinkHtml);
+    allTagsData.tags.push({
+      number: numberForClass,
+      id: singleTag.slice(1),
+      tag: singleTag.slice(1)
+    });
+    /*  variable.insertAdjacentHTML('beforeend', tagLinkHtml); */
 
   }
+  variable.insertAdjacentHTML('beforeend', templates4(allTagsData));
+  console.log(allTagsData.tags);
 }
 
 function calculateamountTagsForRightSection(variable) {
