@@ -497,7 +497,7 @@ function createAuthorListInRightColumn(variable) {
 
       allAuthorsData.authors.push({
         author: author,
-        count: count.length,
+        count: '  ' + '(' + count.length + ')',
         id: author
       });
       countstepsForLoop++;
