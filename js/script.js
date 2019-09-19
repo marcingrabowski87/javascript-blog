@@ -41,7 +41,7 @@ function addAuthorToArticle(article, getDataAuthors) {
     id: getDataAuthors,
     title: getDataAuthors
   };
-  /*  let LinkAuthorHtml = 'by ' + '<a href = "#' + getDataAuthors + '" >' + getDataAuthors + '</a>'; */
+
   const LinkAuthorHtml = templates1(linkHTMLData);
 
   boxNameAuthor.insertAdjacentHTML('afterbegin', LinkAuthorHtml);
@@ -69,7 +69,7 @@ function Cleartext() {
 function getsingleTagForArticle(TagForArticleArray, chooseArticle) {
   for (let singleTag of TagForArticleArray) {
     const articleTag = chooseArticle.querySelector('.list-horizontal');
-    /*  let tagHtml = '<li><a href="#tag-' + singleTag + '">' + singleTag + '</a></li>'; */
+
     const linkHTMLData = {
       id: singleTag,
       title: singleTag
@@ -102,7 +102,6 @@ function generateTags(chooseArticle) {
 
 }
 
-/* -------------*/
 
 function titleClickHandler(event) {
   event.preventDefault();
@@ -148,7 +147,7 @@ function titleClickHandler(event) {
   ClickToLinkAuthorHandler();
 }
 
-/* ----------------------------------------------------------------------------------------------- */
+
 
 
 
@@ -175,10 +174,10 @@ function getSingleArticleIDAndTitlePostAndCreateLinkHtml() {
       id: articleId,
       title: titlePost
     };
-    /* const linkHtml = '<li><a href = "#' + articleId + '"><span>' + titlePost + '</span></a></li>';  */
+
     const linkHtml = templates(linkHTMLData);
 
-    /*  addMessages(linkHtml);  */
+
     addMessages(linkHtml);
   }
 }
@@ -260,7 +259,7 @@ function lookForThesameElements(get) {
             };
 
             const linkHtml = templates(linkHTMLData);
-            /*  const linkHtml = '<li><a href = "#' + articleId + '"><span>' + titlePost + '</span></a></li>'; */
+
             addMessages(linkHtml);
 
 
@@ -324,7 +323,7 @@ function createlinkHtml(singleArticle) {
   const articleId = singleArticle.getAttribute('id');
 
   const titlePost = singleArticle.querySelector('.post-title').innerHTML;
-  /* const linkHtml = '<li><a href = "#' + articleId + '"><span>' + titlePost + '</span></a></li>'; */
+
   const linkHTMLData = {
     id: articleId,
     title: titlePost
@@ -385,7 +384,7 @@ function addLinksHtmlToRightColumn(variable, variable1) {
       id: singleTag.slice(1),
       tag: singleTag.slice(1)
     });
-    /*  variable.insertAdjacentHTML('beforeend', tagLinkHtml); */
+
 
   }
   variable.insertAdjacentHTML('beforeend', templates4(allTagsData));
@@ -423,7 +422,7 @@ function createListInRightColumn(variable) {
     for (let x = 0; x < activeLine.length; x++) {
 
       if ((!List.hasOwnProperty(activeLine[x]))) {
-        /* tagList.push(activeLine[x]); */
+
         List[activeLine[x]] = 1;
       } else
 
@@ -451,17 +450,13 @@ function createListInRightColumn(variable) {
 })();
 
 function addAuthorLinksHtmlToRightColumn(variable) {
-  /***** tuatj pisać (brakuje szablonu dla tagów i autorów w prawej kolumnie )*/
+
   let numberForClass;
-  /* console.log(variable);
-  console.log(variable1); */
+
   for (let singleTag in variable) {
 
     numberForClass = variable[singleTag];
-    /* const allTagsData = {
-      tags: []
-    } */
-    /* let tagLinkHtml = '<li><a href ="#' + singleTag + '">' + variable + ' </a></li> '; */
+
     let tagLinkHtml = '<li><a  href ="' + singleTag + '">' + singleTag.slice(1) + '(' + variable[singleTag] + ')</a></li>';
     document.querySelector('.sidebar .authors').insertAdjacentHTML('beforeend', tagLinkHtml);
 
@@ -513,12 +508,9 @@ function createAuthorListInRightColumn(variable) {
 
 /*Call function  to  create  authors  links-Html for right column*/
 function authorsLinksHtmlToRightColumn() {
-  /* const ulTagRight = document.querySelector('.sidebar .authors'); */
-  /* const LinksTagRight = document.querySelectorAll('.post-author'); */
+
   const LinksTagRight = document.querySelectorAll('.post');
   const autorObject = createAuthorListInRightColumn(LinksTagRight);
-  /*  addAuthorLinksHtmlToRightColumn(ulTagRight, autorObject);
-   */
 
 
   const filterLinkHtml = document.querySelectorAll(".sidebar .authors li ");

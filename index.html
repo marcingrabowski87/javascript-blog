@@ -169,7 +169,6 @@
           <div class="post-tags">
             <p><strong>Tags:</strong></p>
             <ul class="list list-horizontal">
-
             </ul>
           </div>
         </article>
@@ -191,7 +190,6 @@
           <div class="post-tags">
             <p><strong>Tags:</strong></p>
             <ul class="list list-horizontal">
-
             </ul>
           </div>
         </article>
@@ -213,7 +211,6 @@
           <div class="post-tags">
             <p><strong>Tags:</strong></p>
             <ul class="list list-horizontal">
-
             </ul>
           </div>
         </article>
@@ -237,7 +234,6 @@
           <div class="post-tags">
             <p><strong>Tags:</strong></p>
             <ul class="list list-horizontal">
-
             </ul>
           </div>
         </article>
@@ -245,11 +241,9 @@
       <aside class="sidebar">
         <h2 class="section-title">Tags</h2>
         <ul class="list tags">
-
         </ul>
         <h2 class="section-title">Authors</h2>
         <ul class="list authors">
-
         </ul>
       </aside>
     </main>
@@ -257,26 +251,23 @@
   </div>
   <script id="template-article-link" type="text/x-handlebars-template">
     <li><a href="#{{ id }}"><span>{{ title }}</span></a></li>
-</script>
+  </script>
   <script id="template-author-link-in-article" type="text/x-handlebars-template">
     <li>by<a href="#{{ id }}"><span>{{ title }}</span></a></li>
-</script>
+  </script>
   <script id="template-Tag-link-in-article" type="text/x-handlebars-template">
     <li><a href="#{{ id }}"><span>{{ title }}</span></a></li>
-</script>
+  </script>
   <script id="template-author-cloud-link" type="text/x-handlebars-template">
     {{#each authors}}
-
-  <li><a href='#{{ id }}'><span>{{ author }}{{ count }}</span></a></li>
-  {{/each}}
-</script>
+    <li><a href='#{{ id }}'><span>{{ author }}{{ count }}</span></a></li>
+    {{/each}}
+  </script>
   <script id="template-tag-cloud-link" type="text/x-handlebars-template">
     {{#each tags}}
-
-<li><a href='#{{ id }}'class="tag-size-{{ number }}"><span>{{ tag }}</span></a></li>
-{{/each}}
-</script>
-
+    <li><a href='#{{ id }}'class="tag-size-{{ number }}"><span>{{ tag }}</span></a></li>
+    {{/each}}
+  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
   <script src="js/script.js"></script>
 </body>
